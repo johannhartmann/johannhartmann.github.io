@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agile AI Maturity Assessment</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.2em;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .progress-container {
+            background: #f8f9fa;
+            padding: 20px 40px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: #e0e0e0;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .progress-text {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .intro-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f0f7ff;
+            border-left: 4px solid #667eea;
+            border-radius: 8px;
+        }
+        
+        .intro-section h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+        
+        .intro-section p {
+            color: #555;
+            margin-bottom: 10px;
+        }
+        
+        .question-section {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        
+        .question-section.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .question-header {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+        }
+        
+        .question-number {
+            color: #667eea;
+            font-weight: bold;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .question-title {
+            font-size: 1.4em;
+            color: #333;
+            margin: 10px 0;
+        }
+        
+        .question-subtitle {
+            color: #666;
+            font-size: 0.95em;
+        }
+        
+        .options {
+            margin-bottom: 30px;
+        }
+        
+        .option {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .option:hover {
+            border-color: #667eea;
+            background: #f0f7ff;
+            transform: translateX(5px);
+        }
+        
+        .option.selected {
+            border-color: #667eea;
+            background: #f0f7ff;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+        }
+        
+        .option-label {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+        
+        .option-radio {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #667eea;
+            border-radius: 50%;
+            flex-shrink: 0;
+            margin-top: 3px;
+            position: relative;
+        }
+        
+        .option.selected .option-radio::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 10px;
+            height: 10px;
+            background: #667eea;
+            border-radius: 50%;
+        }
+        
+        .option-content {
+            flex: 1;
+        }
+        
+        .option-header {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+            font-size: 1.05em;
+        }
+        
+        .option-description {
+            color: #666;
+            font-size: 0.95em;
+        }
+        
+        .option-level {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin-top: 8px;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #e0e0e0;
+        }
+        
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .btn-secondary {
+            background: #e0e0e0;
+            color: #333;
+        }
+        
+        .btn-secondary:hover {
+            background: #d0d0d0;
+        }
+        
+        .results-section {
+            display: none;
+        }
+        
+        .results-section.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        
+        .results-header {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .results-header h2 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        
+        .level-badge {
+            display: inline-block;
+            font-size: 3em;
+            font-weight: bold;
+            background: rgba(255,255,255,0.2);
+            padding: 20px 40px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+        
+        .level-description {
+            font-size: 1.2em;
+            opacity: 0.95;
+        }
+        
+        .results-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+        
+        .results-card h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        
+        .dimension-result {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .dimension-name {
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .dimension-level {
+            background: #667eea;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+        
+        .recommendations {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .recommendations h4 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+        
+        .recommendations ul {
+            margin-left: 20px;
+            color: #856404;
+        }
+        
+        .recommendations li {
+            margin-bottom: 8px;
+        }
+        
+        .bottleneck-alert {
+            background: #f8d7da;
+            border-left: 4px solid #dc3545;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .bottleneck-alert h4 {
+            color: #721c24;
+            margin-bottom: 10px;
+        }
+        
+        .bottleneck-alert p {
+            color: #721c24;
+        }
+        
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .metric-box {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .metric-label {
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 8px;
+        }
+        
+        .metric-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .chart-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .bar-chart {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .bar-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .bar-label {
+            width: 180px;
+            font-size: 0.9em;
+            color: #555;
+            font-weight: 500;
+        }
+        
+        .bar-track {
+            flex: 1;
+            height: 30px;
+            background: #e0e0e0;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 10px;
+            color: white;
+            font-weight: bold;
+            font-size: 0.9em;
+            transition: width 1s ease;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                border-radius: 0;
+            }
+            
+            .header {
+                padding: 30px 20px;
+            }
+            
+            .header h1 {
+                font-size: 1.6em;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .metric-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .bar-label {
+                width: 120px;
+                font-size: 0.8em;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+        }
+        
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 Agile AI Maturity Assessment</h1>
+            <p>Effiziente Standortbestimmung in 16 Fragen</p>
+        </div>
+        
+        <div class="progress-container">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="progress-text" id="progressText">Frage 1 von 16</div>
+        </div>
+        
+        <div class="content">
+            <!-- Intro Section -->
+            <div id="introSection" class="intro-section">
+                <h2>Willkommen zum Assessment</h2>
+                <p>Dieses Assessment hilft Ihnen, den aktuellen Reifegrad Ihrer Organisation bei der Integration von AI in agile Produktentwicklung zu bestimmen.</p>
+                <p><strong>Was Sie erwartet:</strong></p>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li>Teil A: 3 Baseline-Fragen zur groben Einordnung</li>
+                    <li>Teil B: 13 dimensionsspezifische Fragen für detaillierte Analyse</li>
+                    <li>Dauer: ca. 10-15 Minuten</li>
+                    <li>Am Ende: Detaillierte Auswertung mit Handlungsempfehlungen</li>
+                </ul>
+                <div style="margin-top: 20px; text-align: center;">
+                    <button class="btn btn-primary" onclick="startAssessment()">Assessment starten</button>
+                </div>
+            </div>
+            
+            <!-- Questions will be inserted here -->
+            <div id="questionsContainer"></div>
+            
+            <!-- Results Section -->
+            <div id="resultsSection" class="results-section">
+                <div class="results-header">
+                    <h2>Ihre Ergebnisse</h2>
+                    <div class="level-badge" id="overallLevel">Level ?</div>
+                    <div class="level-description" id="levelDescription"></div>
+                </div>
+                
+                <div class="metric-grid">
+                    <div class="metric-box">
+                        <div class="metric-label">Minimum-Level</div>
+                        <div class="metric-value" id="minLevel">?</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-label">Durchschnitts-Level</div>
+                        <div class="metric-value" id="avgLevel">?</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-label">Produktivität</div>
+                        <div class="metric-value" id="productivity">?x</div>
+                    </div>
+                </div>
+                
+                <div id="bottleneckAlert" class="bottleneck-alert hidden">
+                    <h4>⚠️ Kritische Bottlenecks identifiziert</h4>
+                    <p id="bottleneckText"></p>
+                </div>
+                
+                <div class="results-card">
+                    <h3>📊 Dimensionsanalyse</h3>
+                    <div class="chart-container">
+                        <div class="bar-chart" id="dimensionChart"></div>
+                    </div>
+                </div>
+                
+                <div class="results-card">
+                    <h3>🎯 Detaillierte Bewertung pro Dimension</h3>
+                    <div id="dimensionDetails"></div>
+                </div>
+                
+                <div class="recommendations">
+                    <h4>💡 Nächste Schritte (0-6 Monate)</h4>
+                    <ul id="recommendationsList"></ul>
+                </div>
+                
+                <div class="results-card">
+                    <h3>📈 Transformations-Roadmap</h3>
+                    <div id="roadmapContent"></div>
+                </div>
+                
+                <div class="action-buttons">
+                    <button class="btn btn-primary" onclick="window.print()">📄 Ergebnisse drucken</button>
+                    <button class="btn btn-secondary" onclick="restartAssessment()">🔄 Erneut durchführen</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Assessment data structure
+        const questions = [
+            // Teil A: Baseline
+            {
+                id: 1,
+                part: "A",
+                dimension: "baseline",
+                title: "AI-Tool-Nutzung im Development",
+                subtitle: "Wie nutzt Ihre Organisation aktuell AI-Tools in der Softwareentwicklung?",
+                options: [
+                    { level: 1, text: "Individuell und unsystematisch", detail: "Jeder experimentiert selbst (ChatGPT, Copilot)" },
+                    { level: 2, text: "Systematisch mit Guidelines", detail: "2-3 Agents pro Person, Multi-Threading an Features" },
+                    { level: 3, text: "Unsupervised Development", detail: "Agents generieren Code ohne manuelles Review, Mini-Teams (2-3 Personen)" },
+                    { level: 4, text: "Platform-Team automatisiert kontinuierlich", detail: "Dediziertes Ops/Platform-Team baut Agent-Capabilities" },
+                    { level: 5, text: "Vollautonome Agent-Produktion", detail: "Ops-Team betreibt Agent-Maschine, keine klassischen Dev-Teams mehr" }
+                ]
+            },
+            {
+                id: 2,
+                part: "A",
+                dimension: "baseline",
+                title: "Teamstruktur und Größe",
+                subtitle: "Wie sind Ihre Development-Teams aktuell aufgestellt?",
+                options: [
+                    { level: 1, text: "Klassische Feature-Teams", detail: "7±2 Personen (PO, SM, Devs, QA, Designer)" },
+                    { level: 2, text: "Teams mit 5-7 Personen", detail: "Scrum Master betreut mehrere Teams oder fällt weg" },
+                    { level: 3, text: "Mini-Teams mit 2-3 Personen", detail: "Ohne QA/Designer/Spezialisierung, 1 PO steuert 2-3 Teams" },
+                    { level: 4, text: "Hybrid-Modell", detail: "Mini-Teams + wachsendes Ops/Platform-Team für AI" },
+                    { level: 5, text: "Ops-Modell", detail: "2-200 Personen betreuen Agent-Plattform statt Feature-Teams" }
+                ]
+            },
+            {
+                id: 3,
+                part: "A",
+                dimension: "baseline",
+                title: "Deployment-Frequenz",
+                subtitle: "Wie oft deployen Sie typischerweise in Production?",
+                options: [
+                    { level: 1, text: "Wöchentlich bis monatlich", detail: "" },
+                    { level: 2, text: "Täglich bis mehrmals täglich", detail: "" },
+                    { level: 3, text: "10-20x täglich", detail: "Canary Releases" },
+                    { level: 4, text: "50-100x täglich", detail: "" },
+                    { level: 5, text: "100-1000x täglich", detail: "" }
+                ]
+            },
+            // Teil B: Dimensionen
+            {
+                id: 4,
+                part: "B",
+                dimension: "Methoden & Praktiken",
+                title: "Sprint-Länge und Ceremonies",
+                subtitle: "Wie organisieren Sie Ihre agilen Prozesse?",
+                options: [
+                    { level: 1, text: "2-Wochen-Sprints mit allen Standard-Ceremonies", detail: "Planning, Dailies, Review, Retro" },
+                    { level: 2, text: "1-Wochen-Sprints", detail: "Ceremonies effizienter und kürzer" },
+                    { level: 3, text: "Sprints fallen weg", detail: "Maximal wöchentlich, Dailies ähneln Scrum of Scrums, kein Scrum Master" },
+                    { level: 4, text: "Kontinuierliche Planung durch Agents", detail: "Retros fokussieren auf Automatisierung" },
+                    { level: 5, text: "Keine Sprints/Ceremonies mehr", detail: "Continuous AI-Driven Evolution" }
+                ]
+            },
+            {
+                id: 5,
+                part: "B",
+                dimension: "Werkzeuge & Technologie",
+                title: "Agent-Autonomie und Toolchain",
+                subtitle: "Welche Autonomie haben Ihre AI-Agents?",
+                options: [
+                    { level: 1, text: "Nur Chat-Assistenten", detail: "Ohne Tool-Integration" },
+                    { level: 2, text: "2-3 Agents pro Person mit MCP-Zugriff", detail: "Lesend auf DevTools" },
+                    { level: 3, text: "Agents mit vollem Read/Write-Access", detail: "Claude Code unsupervised, Lovable/Bold für POs" },
+                    { level: 4, text: "Agent-Orchestrierungs-Plattform", detail: "Mit Registry und Workflow-Engine" },
+                    { level: 5, text: "Agentic Mesh/Fabric", detail: "100+ Agent-Typen, Agents erstellen eigene Ressourcen" }
+                ]
+            },
+            {
+                id: 6,
+                part: "B",
+                dimension: "Werkzeuge & Technologie",
+                title: "Automatisierungsgrad",
+                subtitle: "Wie hoch ist der Automatisierungsgrad in Code-Generierung, Testing, Deployment?",
+                options: [
+                    { level: 1, text: "Minimal (~10%)", detail: "Nur Code-Completion" },
+                    { level: 2, text: "Mittel (~60-70%)", detail: "Code-Generierung und Teil-Testing automatisiert" },
+                    { level: 3, text: "Hoch (~80-90%)", detail: "Code, Testing, Deployment weitgehend automatisiert" },
+                    { level: 4, text: "Sehr hoch (~95-98%)", detail: "Fast alles automatisiert" },
+                    { level: 5, text: "Nahezu vollständig (~99%)", detail: "Nur strategische Entscheidungen manuell" }
+                ]
+            },
+            {
+                id: 7,
+                part: "B",
+                dimension: "Prozesse & Workflows",
+                title: "Bug-Fixing-Prozess",
+                subtitle: "Wie werden Bugs in Production behandelt?",
+                options: [
+                    { level: 1, text: "Manuelle Tickets", detail: "Menschen bearbeiten und deployen" },
+                    { level: 2, text: "Agent analysiert Bug", detail: "Schlägt Lösung vor, Mensch genehmigt vor Production" },
+                    { level: 3, text: "Teilautomatisiert (60%)", detail: "Agent fixiert, Mensch schaut vor Production drauf" },
+                    { level: 4, text: "80-90% automatisch gefixt", detail: "Menschen greifen bei Eskalation ein" },
+                    { level: 5, text: "95%+ selbstheilend", detail: "Automatische Detection, Fix, Deploy, Validierung" }
+                ]
+            },
+            {
+                id: 8,
+                part: "B",
+                dimension: "Prozesse & Workflows",
+                title: "Design und Prototyping",
+                subtitle: "Wie entstehen UI/UX-Designs und Prototypen?",
+                options: [
+                    { level: 1, text: "Designer erstellt manuell", detail: "In Figma/Sketch" },
+                    { level: 2, text: "Agents generieren Wireframes", detail: "Designer validiert" },
+                    { level: 3, text: "PO erstellt GUIs mit Kunden", detail: "In Lovable/Bold, Agents generieren A/B-Varianten" },
+                    { level: 4, text: "Agents generieren autonom", detail: "Basierend auf Discovery-Insights" },
+                    { level: 5, text: "Vollautomatisiert", detail: "10+ A/B-Varianten parallel, synthetische User-Tests" }
+                ]
+            },
+            {
+                id: 9,
+                part: "B",
+                dimension: "Rollen & Organisation",
+                title: "Product Owner Rolle",
+                subtitle: "Was sind die Hauptaufgaben Ihrer Product Owner?",
+                options: [
+                    { level: 1, text: "Backlog-Priorisierung", detail: "Sprint Planning, klassisches PO-Handwerk" },
+                    { level: 2, text: "Strategische Priorisierung", detail: "Agents führen taktische Aufgaben aus" },
+                    { level: 3, text: "Erstellt GUIs mit Kunden", detail: "Lovable/Bold, steuert 2-3 Mini-Teams" },
+                    { level: 4, text: "Überwacht Agent-Features", detail: "Validiert strategische Entscheidungen" },
+                    { level: 5, text: "Product Strategist", detail: "Setzt OKRs, überwacht 10-50 Produkte" }
+                ]
+            },
+            {
+                id: 10,
+                part: "B",
+                dimension: "Rollen & Organisation",
+                title: "Spezialisierte Rollen",
+                subtitle: "Welche spezialisierten Rollen existieren noch in Ihren Teams?",
+                options: [
+                    { level: 1, text: "Alle klassischen Rollen vorhanden", detail: "QA, Designer, Frontend/Backend-Spezialisierung" },
+                    { level: 2, text: "Rollen transformieren sich", detail: "QA wird AI-Tester, Designer nutzt AI-Tools" },
+                    { level: 3, text: "Spezialisierte Rollen fallen weg", detail: "Nur noch generische Developers" },
+                    { level: 4, text: "Neue Rolle: Platform/Ops-Engineer", detail: "Für Agent-Entwicklung" },
+                    { level: 5, text: "Keine klassischen Rollen mehr", detail: "Platform Engineers, Agent Developers, Operations Engineers" }
+                ]
+            },
+            {
+                id: 11,
+                part: "B",
+                dimension: "Infrastruktur & Plattformen",
+                title: "Agent-Zugriff auf Production-Systeme",
+                subtitle: "Dürfen Agents auf operative Production-Systeme zugreifen und Entscheidungen treffen?",
+                options: [
+                    { level: 1, text: "Kein Zugriff auf Production", detail: "Agents nur für Development-Tools, keine operativen Systeme" },
+                    { level: 2, text: "Lesender Zugriff auf Production", detail: "Agents können Production-Daten lesen (Monitoring, Logs), aber nicht schreiben" },
+                    { level: 3, text: "Kontrollierter Schreibzugriff", detail: "Agents können in Production schreiben, aber mit menschlicher Freigabe vor kritischen Aktionen" },
+                    { level: 4, text: "Weitgehend autonome Production-Operations", detail: "Agents treffen operative Entscheidungen selbst, Menschen greifen nur bei Eskalation ein" },
+                    { level: 5, text: "Vollautonome Production-Kontrolle", detail: "Agents steuern Production-Systeme komplett autonom (Self-Healing, Auto-Scaling, Deployment)" }
+                ]
+            },
+            {
+                id: 12,
+                part: "B",
+                dimension: "Daten & Verfügbarkeit",
+                title: "Digitalisierungsgrad nach Datentyp",
+                subtitle: "Wie viel Prozent Ihrer strukturierten vs. semi-/unstrukturierten Daten sind digitalisiert?",
+                options: [
+                    { level: 1, text: "Strukturiert: 20-40%, Semi-/Unstrukturiert: <10%", detail: "Primär Excel, manuelle Prozesse dominieren" },
+                    { level: 2, text: "Strukturiert: 40-60%, Semi-/Unstrukturiert: 10-30%", detail: "Data Warehouse vorhanden, erste RAG-Systeme" },
+                    { level: 3, text: "Strukturiert: 60-80%, Semi-/Unstrukturiert: 30-50%", detail: "Strukturiert real-time, unstrukturiert teilweise erschlossen" },
+                    { level: 4, text: "Strukturiert: 80-95%, Semi-/Unstrukturiert: 50-80%", detail: "Strukturiert vollständig, unstrukturiert weitgehend erschlossen" },
+                    { level: 5, text: "Strukturiert: 95-100%, Semi-/Unstrukturiert: 80-100%", detail: "Nahezu vollständige Digitalisierung, semantische Modelle" }
+                ]
+            },
+            {
+                id: 13,
+                part: "B",
+                dimension: "Daten & Verfügbarkeit",
+                title: "Datenqualität",
+                subtitle: "Wie hoch ist die Qualität und Vollständigkeit Ihrer Daten?",
+                options: [
+                    { level: 1, text: "Variable Qualität", detail: "Manuelle Pflege, lückenhaft" },
+                    { level: 2, text: "~80% Qualität", detail: "Durch Automatisierung, systematische Quality Checks" },
+                    { level: 3, text: "~95% Qualität, ~50% Vollständigkeit", detail: "Historische Lücken" },
+                    { level: 4, text: "~98% Qualität, ~80% Vollständigkeit", detail: "Self-healing pipelines" },
+                    { level: 5, text: "Nahezu 100% beides", detail: "Vollautomatisierte Governance" }
+                ]
+            },
+            {
+                id: 14,
+                part: "B",
+                dimension: "Enterprise-Integration",
+                title: "Agent-to-Agent (A2A) Kommunikation",
+                subtitle: "Wie kommunizieren Agents untereinander und mit Enterprise-Systemen?",
+                options: [
+                    { level: 1, text: "Keine Agent-Kommunikation", detail: "Menschen integrieren Systeme manuell" },
+                    { level: 2, text: "MCP als Standard", detail: "Erste automatisierte Workflows (Jira → GitHub → Deploy)" },
+                    { level: 3, text: "MCP + erste A2A", detail: "Einfache Koordination, Message Queues (Kafka)" },
+                    { level: 4, text: "A2A etabliert", detail: "Agentische Aushandlung, Service Mesh" },
+                    { level: 5, text: "A2A als Standard", detail: "Aushandlung über Prioritäten/Ressourcen/Dependencies, Event Mesh" }
+                ]
+            },
+            {
+                id: 15,
+                part: "B",
+                dimension: "Kompetenzen & Skills",
+                title: "Kritische Skills im Team",
+                subtitle: "Welche Skills sind aktuell am kritischsten für Ihre Organisation?",
+                options: [
+                    { level: 1, text: "Klassische Software-Engineering Skills", detail: "Domain Knowledge, AI-Literacy (Basis)" },
+                    { level: 2, text: "Agent Orchestration", detail: "2-3 parallel, Prompt Engineering, Validation Skills" },
+                    { level: 3, text: "Unsupervised Development", detail: "Rapid Validation, Tool Mastery (Claude Code, Lovable/Bold)" },
+                    { level: 4, text: "Platform Engineering", detail: "Agent Development, System Architecture, Observability" },
+                    { level: 5, text: "Expert Platform Engineering", detail: "Multi-Agent Systems, Governance & Risk Management" }
+                ]
+            },
+            {
+                id: 16,
+                part: "B",
+                dimension: "Capabilities & Outcomes",
+                title: "Produktivitätssteigerung",
+                subtitle: "Welche Produktivitätssteigerung haben Sie durch AI erreicht?",
+                options: [
+                    { level: 1, text: "Baseline (1x)", detail: "Erste Experimente mit ~10-20% bei einzelnen Tasks" },
+                    { level: 2, text: "1,5-2x", detail: "Team-Level Produktivität" },
+                    { level: 3, text: "2x pro Person, 3-4x Team", detail: "Signifikante Steigerung" },
+                    { level: 4, text: "3-5x pro Person, 5-8x Team", detail: "Hohe Produktivität" },
+                    { level: 5, text: "10-50x", detail: "Auf Personenzahl gerechnet" }
+                ]
+            }
+        ];
+
+        // Dimension mapping
+        const dimensionMapping = {
+            "Methoden & Praktiken": 4,
+            "Werkzeuge & Technologie": [5, 6],
+            "Prozesse & Workflows": [7, 8],
+            "Rollen & Organisation": [9, 10],
+            "Infrastruktur & Plattformen": 11,
+            "Daten & Verfügbarkeit": [12, 13],
+            "Enterprise-Integration": 14,
+            "Kompetenzen & Skills": 15,
+            "Capabilities & Outcomes": 16
+        };
+
+        // State
+        let currentQuestion = 0;
+        let answers = {};
+        let showingIntro = true;
+
+        // Level descriptions
+        const levelDescriptions = {
+            1: {
+                title: "AI-Assistierte Arbeit",
+                description: "Experimentierphase mit individueller AI-Nutzung",
+                productivity: "1x",
+                timeframe: "3-6 Monate bis Level 2"
+            },
+            2: {
+                title: "AI-Augmentierte Entwicklung",
+                description: "Systematischer Agent-Einsatz mit Multi-Threading",
+                productivity: "1,5-2x",
+                timeframe: "6-12 Monate bis Level 3"
+            },
+            3: {
+                title: "AI-Integrierte Mini-Teams",
+                description: "Hochproduktive Mini-Teams mit unsupervised Development",
+                productivity: "3-4x",
+                timeframe: "12-18 Monate bis Level 4"
+            },
+            4: {
+                title: "Agent-Getriebene Entwicklung",
+                description: "Migrationsphase mit kontinuierlicher Automatisierung",
+                productivity: "5-8x",
+                timeframe: "12-24 Monate bis Level 5"
+            },
+            5: {
+                title: "Autonome AI-Produktion",
+                description: "Ops-Modell mit vollautonomer Agent-Maschine",
+                productivity: "10-50x",
+                timeframe: "Kontinuierliche Evolution"
+            }
+        };
+
+        function startAssessment() {
+            showingIntro = false;
+            document.getElementById('introSection').style.display = 'none';
+            renderQuestions();
+            showQuestion(0);
+        }
+
+        function renderQuestions() {
+            const container = document.getElementById('questionsContainer');
+            container.innerHTML = '';
+            
+            questions.forEach((q, index) => {
+                const section = document.createElement('div');
+                section.className = 'question-section';
+                section.id = `question-${index}`;
+                
+                let partLabel = q.part === 'A' ? 'TEIL A: BASELINE-ERMITTLUNG' : 'TEIL B: DIMENSIONSSPEZIFISCHE VERTIEFUNG';
+                
+                section.innerHTML = `
+                    <div class="question-header">
+                        <div class="question-number">${partLabel} - Frage ${q.id}</div>
+                        ${q.dimension !== 'baseline' ? `<div class="question-number" style="color: #764ba2;">📊 ${q.dimension}</div>` : ''}
+                        <div class="question-title">${q.title}</div>
+                        <div class="question-subtitle">${q.subtitle}</div>
+                    </div>
+                    <div class="options">
+                        ${q.options.map((opt, optIndex) => `
+                            <div class="option" onclick="selectOption(${index}, ${optIndex}, ${opt.level})">
+                                <div class="option-label">
+                                    <div class="option-radio"></div>
+                                    <div class="option-content">
+                                        <div class="option-header">${opt.text}</div>
+                                        ${opt.detail ? `<div class="option-description">${opt.detail}</div>` : ''}
+                                        <span class="option-level">Level ${opt.level}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div class="navigation">
+                        <button class="btn btn-secondary" onclick="previousQuestion()" ${index === 0 ? 'style="visibility: hidden;"' : ''}>
+                            ← Zurück
+                        </button>
+                        <button class="btn btn-primary" id="nextBtn-${index}" onclick="nextQuestion()" disabled>
+                            ${index === questions.length - 1 ? 'Auswertung anzeigen' : 'Weiter →'}
+                        </button>
+                    </div>
+                `;
+                
+                container.appendChild(section);
+            });
+        }
+
+        function selectOption(questionIndex, optionIndex, level) {
+            const question = questions[questionIndex];
+            const section = document.getElementById(`question-${questionIndex}`);
+            const options = section.querySelectorAll('.option');
+            
+            // Remove selection from all options
+            options.forEach(opt => opt.classList.remove('selected'));
+            
+            // Add selection to clicked option
+            options[optionIndex].classList.add('selected');
+            
+            // Store answer
+            answers[question.id] = {
+                questionId: question.id,
+                dimension: question.dimension,
+                level: level
+            };
+            
+            // Enable next button
+            document.getElementById(`nextBtn-${questionIndex}`).disabled = false;
+        }
+
+        function showQuestion(index) {
+            document.querySelectorAll('.question-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            document.getElementById(`question-${index}`).classList.add('active');
+            currentQuestion = index;
+            
+            updateProgress();
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function previousQuestion() {
+            if (currentQuestion > 0) {
+                showQuestion(currentQuestion - 1);
+            }
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < questions.length - 1) {
+                showQuestion(currentQuestion + 1);
+            } else {
+                showResults();
+            }
+        }
+
+        function updateProgress() {
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+            document.getElementById('progressFill').style.width = `${progress}%`;
+            document.getElementById('progressText').textContent = `Frage ${currentQuestion + 1} von ${questions.length}`;
+        }
+
+        function calculateResults() {
+            const dimensionLevels = {};
+            
+            // Calculate levels per dimension
+            Object.entries(dimensionMapping).forEach(([dimension, questionIds]) => {
+                const ids = Array.isArray(questionIds) ? questionIds : [questionIds];
+                const levels = ids.map(id => answers[id]?.level).filter(l => l !== undefined);
+                
+                if (levels.length > 0) {
+                    // Use minimum level if multiple questions
+                    dimensionLevels[dimension] = Math.min(...levels);
+                }
+            });
+            
+            const levels = Object.values(dimensionLevels);
+            const minLevel = Math.min(...levels);
+            const avgLevel = Math.round(levels.reduce((a, b) => a + b, 0) / levels.length);
+            const maxLevel = Math.max(...levels);
+            
+            // Find bottlenecks (dimensions at minimum level)
+            const bottlenecks = Object.entries(dimensionLevels)
+                .filter(([dim, level]) => level === minLevel)
+                .map(([dim]) => dim);
+            
+            return {
+                dimensionLevels,
+                minLevel,
+                avgLevel,
+                maxLevel,
+                bottlenecks,
+                allLevels: levels
+            };
+        }
+
+        function showResults() {
+            document.getElementById('questionsContainer').style.display = 'none';
+            document.querySelector('.progress-container').style.display = 'none';
+            
+            const results = calculateResults();
+            const resultsSection = document.getElementById('resultsSection');
+            resultsSection.classList.add('active');
+            
+            // Overall level (using minimum)
+            const overallLevel = results.minLevel;
+            const levelInfo = levelDescriptions[overallLevel];
+            
+            document.getElementById('overallLevel').textContent = `Level ${overallLevel}`;
+            document.getElementById('levelDescription').textContent = levelInfo.title;
+            
+            // Metrics
+            document.getElementById('minLevel').textContent = results.minLevel;
+            document.getElementById('avgLevel').textContent = results.avgLevel.toFixed(1);
+            document.getElementById('productivity').textContent = levelInfo.productivity;
+            
+            // Bottlenecks
+            if (results.bottlenecks.length > 0) {
+                document.getElementById('bottleneckAlert').classList.remove('hidden');
+                document.getElementById('bottleneckText').innerHTML = `
+                    Ihre Organisation wird durch folgende Dimensionen limitiert:<br>
+                    <strong>${results.bottlenecks.join(', ')}</strong><br>
+                    Diese Bereiche sollten priorisiert werden.
+                `;
+            }
+            
+            // Dimension chart
+            const chartHtml = Object.entries(results.dimensionLevels)
+                .sort((a, b) => a[1] - b[1]) // Sort by level
+                .map(([dimension, level]) => {
+                    const width = (level / 5) * 100;
+                    return `
+                        <div class="bar-item">
+                            <div class="bar-label">${dimension}</div>
+                            <div class="bar-track">
+                                <div class="bar-fill" style="width: ${width}%">Level ${level}</div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            
+            document.getElementById('dimensionChart').innerHTML = chartHtml;
+            
+            // Dimension details
+            const detailsHtml = Object.entries(results.dimensionLevels)
+                .map(([dimension, level]) => `
+                    <div class="dimension-result">
+                        <span class="dimension-name">${dimension}</span>
+                        <span class="dimension-level">Level ${level}</span>
+                    </div>
+                `).join('');
+            
+            document.getElementById('dimensionDetails').innerHTML = detailsHtml;
+            
+            // Recommendations
+            const recommendations = generateRecommendations(results);
+            const recList = recommendations.map(rec => `<li>${rec}</li>`).join('');
+            document.getElementById('recommendationsList').innerHTML = recList;
+            
+            // Roadmap
+            const roadmap = generateRoadmap(results);
+            document.getElementById('roadmapContent').innerHTML = roadmap;
+            
+            // Scroll to results
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function generateRecommendations(results) {
+            const recommendations = [];
+            
+            // Dimension-specific recommendations based on actual levels
+            const dimensionRecs = {
+                "Methoden & Praktiken": {
+                    1: "Scrum/Kanban etablieren, erste AI-Tool-Experimente starten",
+                    2: "1-Wochen-Sprints einführen, Multi-Threading mit 2-3 Features parallel testen",
+                    3: "Sprints reduzieren/aufgeben, unsupervised Development pilotieren, Scrum Master Rolle überdenken",
+                    4: "Kontinuierliche Planung durch Agents etablieren, Retros auf Automatisierung fokussieren"
+                },
+                "Werkzeuge & Technologie": {
+                    1: "Systematische AI-Tool-Nutzung einführen (GitHub Copilot, Claude, ChatGPT)",
+                    2: "Agent-Orchestrierung aufbauen: 2-3 Agents parallel pro Person, Claude Code einführen",
+                    3: "Unsupervised Development Tools einführen: Lovable/Bold für POs, volle Agent-Autonomie",
+                    4: "Agent-Orchestrierungs-Plattform mit Registry und Workflow-Engine entwickeln"
+                },
+                "Prozesse & Workflows": {
+                    1: "Discovery und Design-Prozesse mit AI anreichern, erste Automatisierung von Routineaufgaben",
+                    2: "Agent-Driven Development etablieren, Bug-Analyse durch Agents automatisieren",
+                    3: "Canary Releases 10-20x täglich einführen, 60% automatische Bug-Fixes erreichen",
+                    4: "Vollautomatisiertes Deployment 50-100x täglich, 80-90% selbstheilende Systeme"
+                },
+                "Rollen & Organisation": {
+                    1: "Klassische Teams beibehalten, aber AI-Literacy aufbauen und Rollenverständnis für Transformation schaffen",
+                    2: "Scrum Master für mehrere Teams oder Rolle auflösen, Developer zu AI Orchestrators entwickeln",
+                    3: "Mini-Teams mit 2-3 Personen etablieren, QA/Designer Rollen eliminieren, PO erstellt GUIs mit Kunden",
+                    4: "Ops/Platform-Team gründen (2-5 Personen), Mini-Teams graduell reduzieren"
+                },
+                "Infrastruktur & Plattformen": {
+                    1: "Production-System-Zugriff vorbereiten: Monitoring und Logs für Agents lesbar machen",
+                    2: "Kontrollierter Schreibzugriff auf Production etablieren: Approval-Gates und Audit-Trails implementieren",
+                    3: "Self-Healing für unkritische Systeme: Agents dürfen autonome Entscheidungen in abgesicherten Bereichen treffen",
+                    4: "Weitgehende Autonomie in Production: Agents treffen operative Entscheidungen, Menschen nur bei Eskalation"
+                },
+                "Daten & Verfügbarkeit": {
+                    1: "Strukturierte Daten auf 40-60% digitalisieren, Data Warehouse aufbauen, manuelle Prozesse systematisch erfassen",
+                    2: "Strukturierte Daten auf 60-80% steigern, semi-/unstrukturierte auf 30-50% mit RAG-Systemen erschließen",
+                    3: "Strukturierte Daten auf 80-95% erhöhen (real-time), semi-/unstrukturierte auf 50-80%, Data Mesh etablieren",
+                    4: "Vollständige Digitalisierung: 95-100% strukturiert, 80-100% semi-/unstrukturiert, Self-Correcting Pipelines"
+                },
+                "Enterprise-Integration": {
+                    1: "API-Landschaft für kritische Systeme aufbauen, MCP als Standard-Protokoll etablieren",
+                    2: "Erste automatisierte Cross-System-Workflows (Jira → GitHub → Deploy) implementieren",
+                    3: "Message Queues (Kafka) für Agent-Kommunikation, erste A2A-Koordination etablieren",
+                    4: "Agent-to-Agent (A2A) Kommunikation als Standard, agentische Aushandlung und Service Mesh"
+                },
+                "Kompetenzen & Skills": {
+                    1: "AI-Literacy (Basis) im gesamten Team aufbauen, Prompt Engineering Grundlagen schulen",
+                    2: "Agent Orchestration Training (2-3 parallel), Validation Skills für AI-Output entwickeln",
+                    3: "Unsupervised Development Skills, Rapid Validation, Tool Mastery (Claude Code, Lovable/Bold)",
+                    4: "Platform Engineering Kompetenzen aufbauen, Agent Development und System Architecture"
+                },
+                "Capabilities & Outcomes": {
+                    1: "Baseline Produktivität messen, erste AI-Experimente mit 10-20% Steigerungen bei Tasks",
+                    2: "1,5-2x Team-Level Produktivität anstreben, Metriken für AI-Impact etablieren",
+                    3: "2x pro Person, 3-4x Team-Level Produktivität erreichen, 4x Feature-Testing mit Nutzern",
+                    4: "3-5x pro Person, 5-8x Team-Level durch kontinuierliche Automatisierung"
+                }
+            };
+            
+            // Find the 3 weakest dimensions (lowest levels)
+            const sortedDimensions = Object.entries(results.dimensionLevels)
+                .sort((a, b) => a[1] - b[1])
+                .slice(0, 3);
+            
+            // Generate recommendations for weakest dimensions
+            sortedDimensions.forEach(([dimension, level]) => {
+                const rec = dimensionRecs[dimension]?.[level];
+                if (rec) {
+                    const isBottleneck = results.bottlenecks.includes(dimension);
+                    const prefix = isBottleneck ? "⚠️ <strong>KRITISCH</strong>" : "🎯";
+                    recommendations.push(`${prefix} <strong>${dimension} (Level ${level}):</strong> ${rec}`);
+                }
+            });
+            
+            // Add general next-level recommendation
+            const currentLevel = results.minLevel;
+            const nextLevel = Math.min(currentLevel + 1, 5);
+            
+            if (currentLevel < 5) {
+                const levelTransitions = {
+                    1: "Fokus: MCP-Integration, Team-Training, systematische AI-Nutzung etablieren",
+                    2: "Fokus: Vertrauen in unsupervised Development aufbauen, Canary Pipelines, Mini-Team-Konzept",
+                    3: "Fokus: Ops/Platform-Team gründen, Agent-Plattform entwickeln, systematische Automatisierung",
+                    4: "Fokus: A2A-Kommunikation etablieren, letzte manuelle Schritte automatisieren, Full Autonomy"
+                };
+                
+                recommendations.push(`<strong>Übergang zu Level ${nextLevel}:</strong> ${levelTransitions[currentLevel]}`);
+            }
+            
+            return recommendations.slice(0, 6); // Limit to 6 recommendations
+        }
+
+        function generateRoadmap(results) {
+            const level = results.minLevel;
+            const targetLevel = Math.min(level + 1, 5);
+            const levelInfo = levelDescriptions[level];
+            const targetInfo = levelDescriptions[targetLevel];
+            
+            let roadmap = `
+                <div style="margin-bottom: 20px;">
+                    <strong>Aktueller Stand:</strong> ${levelInfo.title}<br>
+                    <strong>Nächstes Ziel:</strong> ${targetInfo.title}<br>
+                    <strong>Zeitrahmen:</strong> ${levelInfo.timeframe}
+                </div>
+                
+                <div style="background: white; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                    <strong>📅 Sofort (Monat 1-2):</strong><br>
+            `;
+            
+            if (level === 1) {
+                roadmap += `• MCP-Integration für alle DevTools starten<br>• Team-Training organisieren<br>• Pilotprojekt mit 2-3 Agents definieren`;
+            } else if (level === 2) {
+                roadmap += `• Unsupervised Development in Safe Environment testen<br>• Canary Pipeline aufbauen<br>• Mini-Team-Konzept planen`;
+            } else if (level === 3) {
+                roadmap += `• Ops/Platform-Team rekrutieren<br>• Agent-Plattform-Architektur designen<br>• Erste Automatisierungs-Candidates identifizieren`;
+            } else if (level === 4) {
+                roadmap += `• A2A-Protokolle evaluieren und testen<br>• Governance-Framework für Full Autonomy<br>• Transition-Plan für verbleibende Mini-Teams`;
+            }
+            
+            roadmap += `
+                </div>
+                
+                <div style="background: white; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                    <strong>🎯 Kurzfristig (Monat 3-6):</strong><br>
+            `;
+            
+            if (level === 1) {
+                roadmap += `• Systematische Agent-Nutzung in Production<br>• Datenqualität auf 80%+ verbessern<br>• Produktivitätssteigerung messen`;
+            } else if (level === 2) {
+                roadmap += `• Erste Mini-Teams pilotieren<br>• Rollen-Transformation begleiten<br>• Testing-Automatisierung auf 90%+ steigern`;
+            } else if (level === 3) {
+                roadmap += `• Agent-Plattform MVP in Production<br>• 10+ Aufgaben automatisieren<br>• Observability für Agents etablieren`;
+            } else if (level === 4) {
+                roadmap += `• A2A-Kommunikation in Production<br>• 95%+ Automatisierung erreichen<br>• Event-Driven Architecture etablieren`;
+            }
+            
+            roadmap += `
+                </div>
+                
+                <div style="background: white; padding: 15px; border-radius: 8px;">
+                    <strong>🚀 Mittelfristig (Monat 7-12):</strong><br>
+            `;
+            
+            if (level === 1) {
+                roadmap += `• Multi-Threading etablieren<br>• 1,5-2x Produktivität erreichen<br>• Vorbereitung auf Level 3 Transition`;
+            } else if (level === 2) {
+                roadmap += `• Alle Teams auf Mini-Teams migrieren<br>• 3-4x Produktivität erreichen<br>• Unsupervised Development Standard`;
+            } else if (level === 3) {
+                roadmap += `• Agent-Plattform skalieren<br>• 50+ Automatisierungen live<br>• Preparation für Full Autonomy`;
+            } else if (level === 4) {
+                roadmap += `• Vollautonome Agent-Produktion<br>• Ops-Modell etablieren<br>• 10-50x Produktivität erreichen`;
+            }
+            
+            roadmap += `</div>`;
+            
+            return roadmap;
+        }
+
+        function restartAssessment() {
+            answers = {};
+            currentQuestion = 0;
+            showingIntro = true;
+            
+            document.getElementById('resultsSection').classList.remove('active');
+            document.getElementById('questionsContainer').style.display = 'block';
+            document.querySelector('.progress-container').style.display = 'block';
+            document.getElementById('introSection').style.display = 'block';
+            
+            // Reset all selections
+            document.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+            document.querySelectorAll('[id^="nextBtn-"]').forEach(btn => btn.disabled = true);
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Initialize
+        window.addEventListener('DOMContentLoaded', () => {
+            renderQuestions();
+        });
+    </script>
+</body>
+</html>
