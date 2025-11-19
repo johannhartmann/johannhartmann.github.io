@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agile AI Maturity Model - Infografik</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .subtitle {
+            background: #f8f9fa;
+            padding: 20px 40px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .subtitle h2 {
+            color: #333;
+            font-size: 1.3em;
+            margin-bottom: 10px;
+        }
+
+        .subtitle p {
+            color: #666;
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+
+        .matrix-container {
+            padding: 30px;
+            overflow-x: auto;
+        }
+
+        .matrix {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85em;
+        }
+
+        .matrix th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 10px;
+            text-align: center;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .matrix th.dimension {
+            background: #2c3e50;
+            text-align: left;
+            width: 200px;
+            font-size: 0.9em;
+        }
+
+        .matrix td {
+            padding: 15px;
+            border: 1px solid #ddd;
+            vertical-align: top;
+            line-height: 1.5;
+        }
+
+        .matrix tr:hover td {
+            background: #f0f7ff;
+        }
+
+        .level-1 {
+            background: #fff5f5;
+        }
+
+        .level-2 {
+            background: #fff9e6;
+        }
+
+        .level-3 {
+            background: #e6f7ff;
+        }
+
+        .level-4 {
+            background: #f0f5ff;
+        }
+
+        .level-5 {
+            background: #f0fff4;
+        }
+
+        .level-header {
+            font-weight: 700;
+            font-size: 1.1em;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .level-subtitle {
+            font-style: italic;
+            color: #666;
+            font-size: 0.85em;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .dimension-name {
+            font-weight: 700;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .icon {
+            font-size: 1.3em;
+        }
+
+        .key-metric {
+            background: rgba(102, 126, 234, 0.1);
+            border-left: 3px solid #667eea;
+            padding: 8px;
+            margin-top: 8px;
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            .matrix {
+                font-size: 0.75em;
+            }
+
+            .matrix th,
+            .matrix td {
+                padding: 10px 5px;
+            }
+
+            .dimension-name {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .container {
+                box-shadow: none;
+                border-radius: 0;
+            }
+
+            .matrix th {
+                position: static;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="subtitle">
+            <h2>📊 Framework-Übersicht</h2>
+            <p><strong>5 Reifegrade:</strong> Von AI-Assistierter Arbeit bis zu Autonomer AI-Produktion •
+                <strong>9 Dimensionen:</strong> Methoden, Werkzeuge, Prozesse, Rollen, Infrastruktur, Daten,
+                Enterprise-Integration, Kompetenzen, Outcomes
+            </p>
+        </div>
+
+        <div class="matrix-container">
+            <table class="matrix">
+                <thead>
+                    <tr>
+                        <th class="dimension">Dimension</th>
+                        <th style="width: 18%;">
+                            <span class="level-header">LEVEL 1</span>
+                            <span class="level-subtitle">AI-Assistierte Arbeit</span>
+                        </th>
+                        <th style="width: 18%;">
+                            <span class="level-header">LEVEL 2</span>
+                            <span class="level-subtitle">AI-Augmentierte Entwicklung</span>
+                        </th>
+                        <th style="width: 18%;">
+                            <span class="level-header">LEVEL 3</span>
+                            <span class="level-subtitle">AI-Integrierte Mini-Teams</span>
+                        </th>
+                        <th style="width: 18%;">
+                            <span class="level-header">LEVEL 4</span>
+                            <span class="level-subtitle">Agent-Getriebene Entwicklung</span>
+                        </th>
+                        <th style="width: 18%;">
+                            <span class="level-header">LEVEL 5</span>
+                            <span class="level-subtitle">Autonome AI-Produktion</span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Dimension 1 -->
+                    <tr>
+                        <td class="dimension-name">
+                            <span class="icon">⚡</span>
+                            <span>Methoden & Praktiken</span>
+                        </td>
+                        <td class="level-1">
+                            • Klassisches Scrum/Kanban<br>
+                            • 2-Wochen-Sprints<br>
+                            • Alle Ceremonies bestehen<br>
+                            • Individuelle AI-Exploration<br>
+                            • Menschen arbeiten wie bisher
+                            <div class="key-metric">KI als Chatbot-Assistent</div>
+                        </td>
+                        <td class="level-2">
+                            • <strong>1-Wochen-Sprints</strong><br>
+                            • Ceremonies effizienter<br>
+                            • <strong>Multi-Threading: 2-3 Features/Person</strong><br>
+                            • Agent-Delegation (nicht nur assistieren)<br>
+                            • Guidelines für AI-Einsatz
+                            <div class="key-metric">Agents erstellen Code unter Aufsicht</div>
+                        </td>
+                        <td class="level-3">
+                            • <strong>Sprints fallen weg</strong><br>
+                            • Dailies wie Scrum of Scrums<br>
+                            • <strong>Unsupervised Development</strong><br>
+                            • Scrum Master fällt weg<br>
+                            • Continuous Delivery
+                            <div class="key-metric">Kein Code-Review mehr</div>
+                        </td>
+                        <td class="level-4">
+                            • Transition zwischen Mini-Teams und Full Autonomy<br>
+                            • <strong>Kontinuierliche Planung durch Agents</strong><br>
+                            • Retros fokussieren auf Automatisierung<br>
+                            • Menschen fokussieren auf Ausnahmen
+                            <div class="key-metric">Systematische Automatisierung aller Tasks</div>
+                        </td>
+                        <td class="level-5">
+                            • <strong>Nicht mehr agil im ursprünglichen Sinne</strong><br>
+                            • Keine Sprints, keine Ceremonies<br>
+                            • <strong>Continuous AI-Driven Evolution</strong><br>
+                            • Planning ist internes Agent-Artefakt<br>
+                            • Menschen überwachen, Agents entwickeln
+                            <div class="key-metric">Ops-Modell statt Dev-Teams</div>
+                        </td>
+                    </tr>
+
+                    <!-- Dimension 2 -->
+                    <tr>
+                        <td class="dimension-name">
+                            <span class="icon">🛠️</span>
+                            <span>Werkzeuge & Technologie</span>
+                        </td>
+                        <td class="level-1">
+                            • ChatGPT, Claude, GitHub Copilot<br>
+                            • Chat-Interface für Fragen<br>
+                            • Code-Completion in IDE<br>
+                            • Keine Integration in Workflows<br>
+                            • Konventionelle DevTools
+                            <div class="key-metric">Automatisierung: Minimal</div>
+                        </td>
+                        <td class="level-2">
+                            • Claude, GPT-4, Gemini (Extended)<br>
+                            • <strong>2-3 Agents pro Person parallel</strong><br>
+                            • <strong>MCP-basierte Tool-Nutzung</strong><br>
+                            • GitHub Copilot / Cursor / Windsurf<br>
+                            • Claude Code für autonome Generierung
+                            <div class="key-metric">Code-Generierung: 60-70%</div>
+                        </td>
+                        <td class="level-3">
+                            • <strong>Claude Code: Unsupervised</strong><br>
+                            • <strong>Lovable, Bold, v0: PO erstellt GUIs</strong><br>
+                            • Multi-Agent-Systeme<br>
+                            • Agents: Volle Lese-/Schreibrechte<br>
+                            • Automatische Canary Releases
+                            <div class="key-metric">Code: 80-90%, Testing: 90%</div>
+                        </td>
+                        <td class="level-4">
+                            • <strong>Agent-Orchestrierungs-Plattform</strong><br>
+                            • Registry für Agent-Typen<br>
+                            • Workflow-Engines<br>
+                            • Observability für Agents<br>
+                            • Spezialisierte Agent-Typen
+                            <div class="key-metric">Code: 95%, Testing: 98%, Deploy: 99%</div>
+                        </td>
+                        <td class="level-5">
+                            • <strong>Agentic Mesh / Agent Fabric</strong><br>
+                            • 100+ Agent-Typen im Registry<br>
+                            • Supervisory, Hierarchical, Swarm<br>
+                            • Agents erstellen eigene Environments<br>
+                            • Docker, gVisor, Kubernetes
+                            <div class="key-metric">99% aller Aufgaben in Agents</div>
+                        </td>
+                    </tr>
+
+                    <!-- Dimension 3 -->
+                    <tr>
+                        <td class="dimension-name">
+                            <span class="icon">🔄</span>
+                            <span>Prozesse & Workflows</span>
+                        </td>
+                        <td class="level-1">
+                            • Discovery: Manuell<br>
+                            • Design: Figma/Sketch manuell<br>
+                            • Development: Code-Completion<br>
+                            • Deployment: Wochen-Monate<br>
+                            • Bugs: Manuelle Tickets
+                            <div class="key-metric">100% menschliche Kontrolle</div>
+                        </td>
+                        <td class="level-2">
+                            • Discovery: AI-angereicherte Recherche<br>
+                            • Design: Rapid Prototyping<br>
+                            • <strong>Development: Agent-Driven Coding</strong><br>
+                            • Deployment: Mehrmals täglich<br>
+                            • Bugs: Agent analysiert, Mensch prüft
+                            <div class="key-metric">Menschen orchestrieren 2-3 Agents</div>
+                        </td>
+                        <td class="level-3">
+                            • Discovery: Automatisierte Analyse<br>
+                            • <strong>Design: PO + Kunde in Lovable/Bold</strong><br>
+                            • <strong>Development: Unsupervised</strong><br>
+                            • <strong>Deployment: bis zu 10-20x/Tag</strong><br>
+                            • Bugs: 60% automatisch gefixt
+                            <div class="key-metric">Agent-Teams arbeiten autonom</div>
+                        </td>
+                        <td class="level-4">
+                            • <strong>Discovery: Agents beobachten autonom</strong><br>
+                            • Design: Agents generieren<br>
+                            • Development: Vollständig automatisiert<br>
+                            • Deployment: bis zu 50-100x/Tag<br>
+                            • Bugs: 80-90% automatisch gefixt
+                            <div class="key-metric">Multi-Agent-Workflows autonom</div>
+                        </td>
+                        <td class="level-5">
+                            • <strong>Discovery: Vollautomatisch</strong><br>
+                            • Design: 10+ A/B-Varianten parallel<br>
+                            • Development: Self-Organizing Agents<br>
+                            • Deployment: bis zu 100-1000x/Tag<br>
+                            • <strong>Bugs: 95%+ selbstheilend</strong>
+                            <div class="key-metric">Agentische Aushandlungsprozesse</div>
+                        </td>
+                    </tr>
+
+                    <!-- Dimension 4 -->
+                    <tr>
+                        <td class="dimension-name">
+                            <span class="icon">👥</span>
+                            <span>Rollen & Organisation</span>
+                        </td>
+                        <td class="level-1">
+                            • <strong>7±2 Personen</strong><br>
+                            • 1 PO, 1 Scrum Master<br>
+                            • 3-5 Developers, 1 QA, 1 Designer<br>
+                            • Klassische Feature-Teams<br>
+                            • Entscheidungen: Tage-Wochen
+                            <div class="key-metric">Standard-Teamstruktur</div>
+                        </td>
+                        <td class="level-2">
+                            • <strong>5-7 Personen</strong><br>
+                            • PO unverändert<br>
+                            • Scrum Master betreut mehrere Teams<br>
+                            • Developer wird "AI Orchestrator"<br>
+                            • Entscheidungen: Stunden
+                            <div class="key-metric">Erste Rollentransformation</div>
+                        </td>
+                        <td class="level-3">
+                            • <strong>Mini-Teams: 2-3 Personen</strong><br>
+                            • 1-2 Developers, optional 1 PO<br>
+                            • ❌ QA, Designer, Scrum Master<br>
+                            • <strong>PO erstellt GUIs mit Kunden</strong><br>
+                            • Entscheidungen: Stunden
+                            <div class="key-metric">1 PO steuert 2-3 Mini-Teams</div>
+                        </td>
+                        <td class="level-4">
+                            • <strong>Hybrid: Mini-Teams + Ops-Team</strong><br>
+                            • <strong>Ops/Platform-Team wächst</strong><br>
+                            • Mini-Teams schrumpfen/fusionieren<br>
+                            • Neue Rolle: Platform/Ops-Engineer<br>
+                            • Transition zu Operations
+                            <div class="key-metric">Build the Builders</div>
+                        </td>
+                        <td class="level-5">
+                            • <strong>Ops-Modell: 2-200 Personen</strong><br>
+                            • Product Strategist (ehem. PO)<br>
+                            • Platform Engineer / Agent Developer<br>
+                            • Operations Engineer (Agent-Ops)<br>
+                            • Governance & Compliance Lead
+                            <div class="key-metric">Keine Dev-Teams mehr</div>
+                        </td>
+                    </tr>
+
+                    <!-- Dimension 5 -->
+                    <tr>
+                        <td class="dimension-name">
+                            <span class="icon">🏗️</span>
+                            <span>Infrastruktur & Plattformen</span>
+                        </td>
+                        <td class="level-1">
+                            • Standard Cloud/On-Premise<br>
+                            • Konventionelle DevOps-Plattformen<br>
+                            • Standard CI/CD (Jenkins, GitLab)<br>
+                            • Monitoring: Grafana, ELK<br>
+                            • Keine AI-spezifischen Extensions
+                            <div class="key-metric">Bestehende Infrastructure</div>
+                        </td>
+                        <td class="level-2">
+                            • Bestehende Infrastructure reicht<br>
+                            • <strong>MCP-Integration kritisch</strong><br>
+                            • Jira, GitHub, Grafana mit MCP<br>
+                            • Data Warehouse + Vector DBs<br>
+                            • RAG-Systeme hinter MCP
+                            <div class="key-metric">Agents: Lesender Zugriff</div>
+                        </td>
+                        <td class="level-3">
+                            • Cloud-native wird kritisch<br>
+                            • <strong>Agents: Read/Write-Access</strong><br>
+                            • <strong>Canary Release Pipelines</strong><br>
+                            • Feature-Flag-Systeme<br>
+                            • AI-basierte Anomaly Detection
+                            <div class="key-metric">Vollständige Tool-Integration</div>
+                        </td>
+                        <td class="level-4">
+                            • Massive AI-Workloads<br>
+                            • <strong>Agent-Plattform (Core)</strong><br>
+                            • Agent Registry, Workflow Engine<br>
+                            • Policy Engine, Resource Manager<br>
+                            • Service Mesh (Istio, Linkerd)
+                            <div class="key-metric">Agent-Plattform etabliert</div>
+                        </td>
+                        <td class="level-5">
+                            • <strong>Massive elastische Infrastructure</strong><br>
+                            • <strong>Agents erstellen eigene Ressourcen</strong><br>
+                            • Docker, gVisor, Kubernetes<br>
+                            • Multi-Cloud/Hybrid<br>
+                            • Zero-Trust Architecture
+                            <div class="key-metric">Agents verwalten selbst Compute</div>
+                        </td>
+                    </tr>
+
+                    <!-- Dimension 6 -->
+                    <tr>
+                        <td class="dimension-name">
+                            <span class="icon">📊</span>
+                            <span>Daten & Verfügbarkeit</span>
+                        </td>
+                        <td class="level-1">
+                            • 50-80% digitalisiert<br>
+                            • Primär strukturierte Daten<br>
+                            • Data Warehouse (Batch)<br>
+                            • Kein direkter AI-Zugriff<br>
+                            • Variable Datenqualität
+                            <div class="key-metric">Menschen arbeiten mit Daten</div>
+                        </td>
+                        <td class="level-2">
+                            • 80-90% digitalisiert<br>
+                            • Strukturiert: Near-Realtime<br>
+                            • Unstrukturiert: Selektiv erschlossen<br>
+                            • <strong>Agents: Lesender Zugriff via MCP</strong><br>
+                            • Schreibzugriffe kontrolliert
+                            <div class="key-metric">Qualität: ~80%</div>
+                        </td>
+                        <td class="level-3">
+                            • 95%+ digitalisiert<br>
+                            • Strukturiert: Vollständig, Real-Time<br>
+                            • Unstrukturiert: Umfassend erschlossen<br>
+                            • <strong>Agents: Volle Lese-/Schreibrechte</strong><br>
+                            • Data Mesh Architektur
+                            <div class="key-metric">Qualität: ~95%, Vollständigkeit: ~50%</div>
+                        </td>
+                        <td class="level-4">
+                            • 98%+ digitalisiert<br>
+                            • 100% strukturiert, Real-Time<br>
+                            • 95% unstrukturiert erschlossen<br>
+                            • <strong>Agents: Nahezu unbeschränkt</strong><br>
+                            • Self-Correcting Pipelines
+                            <div class="key-metric">Qualität: ~98%, Vollständigkeit: ~80%</div>
+                        </td>
+                        <td class="level-5">
+                            • <strong>100% digitalisiert</strong><br>
+                            • 100% strukturiert + unstrukturiert<br>
+                            • Semantische Datenmodelle<br>
+                            • Alle Agents: Volle Rechte<br>
+                            • Self-Healing Data
+                            <div class="key-metric">Qualität: ~100%, Vollständigkeit: ~100%</div>
+                        </td>
+                    </tr>
+
+                    <!-- Dimension 7 -->
+                    <tr>
+                        <td class="dimension-name">
+                            <span class="icon">🔗</span>
+                            <span>Enterprise-Integration</span>
+                        </td>
+                        <td class="level-1">
+                            • REST/SOAP APIs<br>
+                            • Manuelle Workflows<br>
+                            • Point-to-Point Integration<br>
+                            • Menschen als Integratoren<br>
+                            • Keine Agent-Schnittstellen
+                            <div class="key-metric">Menschen integrieren Systeme</div>
+                        </td>
+                        <td class="level-2">
+                            • Alle kritischen Systeme: APIs<br>
+                            • <strong>MCP als Standard</strong><br>
+                            • Agents: Cross-System lesend<br>
+                            • Noch kein autonomer Write<br>
+                            • Erste automatisierte Workflows
+                            <div class="key-metric">MCP-Gateway etabliert</div>
+                        </td>
+                        <td class="level-3">
+                            • Comprehensive API Coverage<br>
+                            • MCP + erste A2A-Kommunikation<br>
+                            • <strong>Write-Access mit Guardrails</strong><br>
+                            • Message Queues (Kafka)<br>
+                            • Integration mit ERP/CRM
+                            <div class="key-metric">Automatisierte End-to-End-Prozesse</div>
+                        </td>
+                        <td class="level-4">
+                            • <strong>Agent-to-Agent etabliert</strong><br>
+                            • Standardisierte A2A-Protokolle<br>
+                            • Event-Driven Architectures<br>
+                            • Service Mesh<br>
+                            • Agentische Aushandlung (einfach)
+                            <div class="key-metric">Cross-System vollautomatisiert</div>
+                        </td>
+                        <td class="level-5">
+                            • <strong>100% API-Coverage</strong><br>
+                            • A2A als Standard (Google A2A)<br>
+                            • <strong>Agentische Aushandlung</strong><br>
+                            • Service Mesh + Event Mesh<br>
+                            • Enterprise-Systeme agentifiziert
+                            <div class="key-metric">Agents verhandeln autonom</div>
+                        </td>
+                    </tr>
+
+                    <!-- Dimension 8 -->
+                    <tr>
+                        <td class="dimension-name">
+                            <span class="icon">🎓</span>
+                            <span>Kompetenzen & Skills</span>
+                        </td>
+                        <td class="level-1">
+                            • Klassische Programmierung<br>
+                            • Domain Knowledge<br>
+                            • <strong>AI-Literacy (Basis)</strong><br>
+                            • Tool-Nutzung experimentell<br>
+                            • Offenheit für AI
+                            <div class="key-metric">Kann Chatbots bedienen</div>
+                        </td>
+                        <td class="level-2">
+                            • <strong>Agent Orchestration (Basis)</strong><br>
+                            • Prompt Engineering (Fortgeschr.)<br>
+                            • Validation Skills<br>
+                            • System Thinking<br>
+                            • Code Reading > Coding
+                            <div class="key-metric">2-3 Agents parallel steuern</div>
+                        </td>
+                        <td class="level-3">
+                            • <strong>Unsupervised Development</strong><br>
+                            • Agent Orchestration (Fortgeschr.)<br>
+                            • System Architecture<br>
+                            • Rapid Validation<br>
+                            • Customer Interaction (PO)
+                            <div class="key-metric">Vertrauen in AI-Code</div>
+                        </td>
+                        <td class="level-4">
+                            • <strong>Platform Engineering</strong><br>
+                            • Agent Development<br>
+                            • System Architecture (Expert)<br>
+                            • Observability & Debugging<br>
+                            • Policy Design
+                            <div class="key-metric">Build the Builders</div>
+                        </td>
+                        <td class="level-5">
+                            • <strong>Platform Engineering (Expert)</strong><br>
+                            • Multi-Agent Systems (MAS)<br>
+                            • Distributed Systems<br>
+                            • Governance & Risk Management<br>
+                            • ML/AI Grundlagen
+                            <div class="key-metric">Build the System that Builds Products</div>
+                        </td>
+                    </tr>
+
+                    <!-- Dimension 9 -->
+                    <tr>
+                        <td class="dimension-name">
+                            <span class="icon">🎯</span>
+                            <span>Capabilities & Outcomes</span>
+                        </td>
+                        <td class="level-1">
+                            • Geschwindigkeit: Wochen-Monate<br>
+                            • Produktivität: <strong>1x (Baseline)</strong><br>
+                            • Deployment: Wöchentlich-Monatlich<br>
+                            • Kosten: Baseline<br>
+                            • ROI: Unklar
+                            <div class="key-metric">Change Failure Rate: 15-30%</div>
+                        </td>
+                        <td class="level-2">
+                            • Geschwindigkeit: Wochen<br>
+                            • Produktivität: <strong>1,5-2x</strong><br>
+                            • Deployment: Mehrmals täglich<br>
+                            • Kosten: -30-40% pro Feature<br>
+                            • ROI: Messbar positiv
+                            <div class="key-metric">6-10 Features parallel</div>
+                        </td>
+                        <td class="level-3">
+                            • Geschwindigkeit: <strong>Tage</strong><br>
+                            • Produktivität: <strong>3-4x</strong><br>
+                            • Deployment: bis zu 10-20x täglich<br>
+                            • Kosten: -50-60%<br>
+                            • ROI: <strong>3-5x</strong>
+                            <div class="key-metric">4x Feature-Testing mit Nutzern</div>
+                        </td>
+                        <td class="level-4">
+                            • Geschwindigkeit: <strong>Stunden</strong><br>
+                            • Produktivität: <strong>5-8x</strong><br>
+                            • Deployment: bis zu 50-100x täglich<br>
+                            • Kosten: -60-70%<br>
+                            • ROI: <strong>5-10x</strong>
+                            <div class="key-metric">Kontinuierliche Automatisierung</div>
+                        </td>
+                        <td class="level-5">
+                            • Geschwindigkeit: <strong>Stunden (LLM-Speed)</strong><br>
+                            • Produktivität: <strong>10-50x</strong><br>
+                            • Deployment: bis zu 100-1000x täglich<br>
+                            • Kosten: -80-90%<br>
+                            • ROI: <strong>10-100x</strong>
+                            <div class="key-metric">10-100 Produkte parallel</div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>

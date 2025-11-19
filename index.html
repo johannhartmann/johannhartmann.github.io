@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,46 +11,46 @@
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             padding: 20px;
             line-height: 1.6;
         }
-        
+
         .container {
             max-width: 900px;
             margin: 0 auto;
             background: white;
             border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             overflow: hidden;
         }
-        
+
         .header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             padding: 40px;
             text-align: center;
         }
-        
+
         .header h1 {
             font-size: 2.2em;
             margin-bottom: 10px;
         }
-        
+
         .header p {
             font-size: 1.1em;
             opacity: 0.9;
         }
-        
+
         .progress-container {
             background: #f8f9fa;
             padding: 20px 40px;
             border-bottom: 2px solid #e0e0e0;
         }
-        
+
         .progress-bar {
             width: 100%;
             height: 10px;
@@ -57,25 +58,25 @@
             border-radius: 5px;
             overflow: hidden;
         }
-        
+
         .progress-fill {
             height: 100%;
             background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
             width: 0%;
             transition: width 0.3s ease;
         }
-        
+
         .progress-text {
             margin-top: 10px;
             font-size: 0.9em;
             color: #666;
             text-align: center;
         }
-        
+
         .content {
             padding: 40px;
         }
-        
+
         .intro-section {
             margin-bottom: 30px;
             padding: 20px;
@@ -83,38 +84,45 @@
             border-left: 4px solid #667eea;
             border-radius: 8px;
         }
-        
+
         .intro-section h2 {
             color: #667eea;
             margin-bottom: 15px;
         }
-        
+
         .intro-section p {
             color: #555;
             margin-bottom: 10px;
         }
-        
+
         .question-section {
             display: none;
             animation: fadeIn 0.5s;
         }
-        
+
         .question-section.active {
             display: block;
         }
-        
+
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
-        
+
         .question-header {
             background: #f8f9fa;
             padding: 20px;
             border-radius: 10px;
             margin-bottom: 25px;
         }
-        
+
         .question-number {
             color: #667eea;
             font-weight: bold;
@@ -122,22 +130,22 @@
             text-transform: uppercase;
             letter-spacing: 1px;
         }
-        
+
         .question-title {
             font-size: 1.4em;
             color: #333;
             margin: 10px 0;
         }
-        
+
         .question-subtitle {
             color: #666;
             font-size: 0.95em;
         }
-        
+
         .options {
             margin-bottom: 30px;
         }
-        
+
         .option {
             background: white;
             border: 2px solid #e0e0e0;
@@ -147,25 +155,25 @@
             cursor: pointer;
             transition: all 0.3s ease;
         }
-        
+
         .option:hover {
             border-color: #667eea;
             background: #f0f7ff;
             transform: translateX(5px);
         }
-        
+
         .option.selected {
             border-color: #667eea;
             background: #f0f7ff;
             box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
         }
-        
+
         .option-label {
             display: flex;
             align-items: flex-start;
             gap: 15px;
         }
-        
+
         .option-radio {
             width: 20px;
             height: 20px;
@@ -175,7 +183,7 @@
             margin-top: 3px;
             position: relative;
         }
-        
+
         .option.selected .option-radio::after {
             content: '';
             position: absolute;
@@ -187,23 +195,23 @@
             background: #667eea;
             border-radius: 50%;
         }
-        
+
         .option-content {
             flex: 1;
         }
-        
+
         .option-header {
             font-weight: bold;
             color: #333;
             margin-bottom: 5px;
             font-size: 1.05em;
         }
-        
+
         .option-description {
             color: #666;
             font-size: 0.95em;
         }
-        
+
         .option-level {
             display: inline-block;
             background: #667eea;
@@ -214,7 +222,7 @@
             font-weight: bold;
             margin-top: 8px;
         }
-        
+
         .navigation {
             display: flex;
             justify-content: space-between;
@@ -222,7 +230,7 @@
             padding-top: 20px;
             border-top: 2px solid #e0e0e0;
         }
-        
+
         .btn {
             padding: 12px 30px;
             border: none;
@@ -232,41 +240,41 @@
             cursor: pointer;
             transition: all 0.3s ease;
         }
-        
+
         .btn-primary {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
         }
-        
+
         .btn-primary:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
         }
-        
+
         .btn-primary:disabled {
             opacity: 0.5;
             cursor: not-allowed;
             transform: none;
         }
-        
+
         .btn-secondary {
             background: #e0e0e0;
             color: #333;
         }
-        
+
         .btn-secondary:hover {
             background: #d0d0d0;
         }
-        
+
         .results-section {
             display: none;
         }
-        
+
         .results-section.active {
             display: block;
             animation: fadeIn 0.5s;
         }
-        
+
         .results-header {
             text-align: center;
             padding: 30px;
@@ -275,40 +283,40 @@
             border-radius: 15px;
             margin-bottom: 30px;
         }
-        
+
         .results-header h2 {
             font-size: 2em;
             margin-bottom: 10px;
         }
-        
+
         .level-badge {
             display: inline-block;
             font-size: 3em;
             font-weight: bold;
-            background: rgba(255,255,255,0.2);
+            background: rgba(255, 255, 255, 0.2);
             padding: 20px 40px;
             border-radius: 15px;
             margin: 20px 0;
         }
-        
+
         .level-description {
             font-size: 1.2em;
             opacity: 0.95;
         }
-        
+
         .results-card {
             background: #f8f9fa;
             border-radius: 12px;
             padding: 25px;
             margin-bottom: 20px;
         }
-        
+
         .results-card h3 {
             color: #667eea;
             margin-bottom: 15px;
             font-size: 1.3em;
         }
-        
+
         .dimension-result {
             background: white;
             padding: 15px;
@@ -318,12 +326,12 @@
             justify-content: space-between;
             align-items: center;
         }
-        
+
         .dimension-name {
             font-weight: 600;
             color: #333;
         }
-        
+
         .dimension-level {
             background: #667eea;
             color: white;
@@ -331,7 +339,7 @@
             border-radius: 20px;
             font-weight: bold;
         }
-        
+
         .recommendations {
             background: #fff3cd;
             border-left: 4px solid #ffc107;
@@ -339,21 +347,21 @@
             border-radius: 8px;
             margin-bottom: 20px;
         }
-        
+
         .recommendations h4 {
             color: #856404;
             margin-bottom: 10px;
         }
-        
+
         .recommendations ul {
             margin-left: 20px;
             color: #856404;
         }
-        
+
         .recommendations li {
             margin-bottom: 8px;
         }
-        
+
         .bottleneck-alert {
             background: #f8d7da;
             border-left: 4px solid #dc3545;
@@ -361,69 +369,69 @@
             border-radius: 8px;
             margin-bottom: 20px;
         }
-        
+
         .bottleneck-alert h4 {
             color: #721c24;
             margin-bottom: 10px;
         }
-        
+
         .bottleneck-alert p {
             color: #721c24;
         }
-        
+
         .metric-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 15px;
             margin: 20px 0;
         }
-        
+
         .metric-box {
             background: white;
             padding: 20px;
             border-radius: 10px;
             text-align: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
-        
+
         .metric-label {
             color: #666;
             font-size: 0.9em;
             margin-bottom: 8px;
         }
-        
+
         .metric-value {
             font-size: 2em;
             font-weight: bold;
             color: #667eea;
         }
-        
+
         .chart-container {
             background: white;
             padding: 20px;
             border-radius: 10px;
             margin: 20px 0;
         }
-        
+
         .bar-chart {
             display: flex;
             flex-direction: column;
             gap: 15px;
         }
-        
+
         .bar-item {
             display: flex;
             align-items: center;
             gap: 15px;
         }
-        
+
         .bar-label {
             width: 180px;
             font-size: 0.9em;
             color: #555;
             font-weight: 500;
         }
-        
+
         .bar-track {
             flex: 1;
             height: 30px;
@@ -432,7 +440,7 @@
             overflow: hidden;
             position: relative;
         }
-        
+
         .bar-fill {
             height: 100%;
             background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
@@ -446,69 +454,71 @@
             font-size: 0.9em;
             transition: width 1s ease;
         }
-        
+
         .action-buttons {
             display: flex;
             gap: 15px;
             justify-content: center;
             margin-top: 30px;
         }
-        
+
         @media (max-width: 768px) {
             .container {
                 border-radius: 0;
             }
-            
+
             .header {
                 padding: 30px 20px;
             }
-            
+
             .header h1 {
                 font-size: 1.6em;
             }
-            
+
             .content {
                 padding: 20px;
             }
-            
+
             .metric-grid {
                 grid-template-columns: 1fr;
             }
-            
+
             .bar-label {
                 width: 120px;
                 font-size: 0.8em;
             }
-            
+
             .action-buttons {
                 flex-direction: column;
             }
         }
-        
+
         .hidden {
             display: none;
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="header">
             <h1>🎯 Agile AI Maturity Assessment</h1>
             <p>Effiziente Standortbestimmung in 16 Fragen</p>
         </div>
-        
+
         <div class="progress-container">
             <div class="progress-bar">
                 <div class="progress-fill" id="progressFill"></div>
             </div>
             <div class="progress-text" id="progressText">Frage 1 von 16</div>
         </div>
-        
+
         <div class="content">
             <!-- Intro Section -->
             <div id="introSection" class="intro-section">
                 <h2>Willkommen zum Assessment</h2>
-                <p>Dieses Assessment hilft Ihnen, den aktuellen Reifegrad Ihrer Organisation bei der Integration von AI in agile Produktentwicklung zu bestimmen.</p>
+                <p>Dieses Assessment hilft Ihnen, den aktuellen Reifegrad Ihrer Organisation bei der Integration von AI
+                    in agile Produktentwicklung zu bestimmen.</p>
                 <p><strong>Was Sie erwartet:</strong></p>
                 <ul style="margin-left: 20px; margin-top: 10px;">
                     <li>Teil A: 3 Baseline-Fragen zur groben Einordnung</li>
@@ -516,14 +526,19 @@
                     <li>Dauer: ca. 10-15 Minuten</li>
                     <li>Am Ende: Detaillierte Auswertung mit Handlungsempfehlungen</li>
                 </ul>
+                <p style="margin-top: 15px;">
+                    Grundlage für dieses Assessment ist das <a href="model.html" target="_blank"
+                        style="color: #667eea; text-decoration: underline; font-weight: bold;">Agile AI Maturity
+                        Model</a>.
+                </p>
                 <div style="margin-top: 20px; text-align: center;">
                     <button class="btn btn-primary" onclick="startAssessment()">Assessment starten</button>
                 </div>
             </div>
-            
+
             <!-- Questions will be inserted here -->
             <div id="questionsContainer"></div>
-            
+
             <!-- Results Section -->
             <div id="resultsSection" class="results-section">
                 <div class="results-header">
@@ -531,7 +546,7 @@
                     <div class="level-badge" id="overallLevel">Level ?</div>
                     <div class="level-description" id="levelDescription"></div>
                 </div>
-                
+
                 <div class="metric-grid">
                     <div class="metric-box">
                         <div class="metric-label">Minimum-Level</div>
@@ -546,34 +561,34 @@
                         <div class="metric-value" id="productivity">?x</div>
                     </div>
                 </div>
-                
+
                 <div id="bottleneckAlert" class="bottleneck-alert hidden">
                     <h4>⚠️ Kritische Bottlenecks identifiziert</h4>
                     <p id="bottleneckText"></p>
                 </div>
-                
+
                 <div class="results-card">
                     <h3>📊 Dimensionsanalyse</h3>
                     <div class="chart-container">
                         <div class="bar-chart" id="dimensionChart"></div>
                     </div>
                 </div>
-                
+
                 <div class="results-card">
                     <h3>🎯 Detaillierte Bewertung pro Dimension</h3>
                     <div id="dimensionDetails"></div>
                 </div>
-                
+
                 <div class="recommendations">
                     <h4>💡 Nächste Schritte (0-6 Monate)</h4>
                     <ul id="recommendationsList"></ul>
                 </div>
-                
+
                 <div class="results-card">
                     <h3>📈 Transformations-Roadmap</h3>
                     <div id="roadmapContent"></div>
                 </div>
-                
+
                 <div class="action-buttons">
                     <button class="btn btn-primary" onclick="window.print()">📄 Ergebnisse drucken</button>
                     <button class="btn btn-secondary" onclick="restartAssessment()">🔄 Erneut durchführen</button>
@@ -875,14 +890,14 @@
         function renderQuestions() {
             const container = document.getElementById('questionsContainer');
             container.innerHTML = '';
-            
+
             questions.forEach((q, index) => {
                 const section = document.createElement('div');
                 section.className = 'question-section';
                 section.id = `question-${index}`;
-                
+
                 let partLabel = q.part === 'A' ? 'TEIL A: BASELINE-ERMITTLUNG' : 'TEIL B: DIMENSIONSSPEZIFISCHE VERTIEFUNG';
-                
+
                 section.innerHTML = `
                     <div class="question-header">
                         <div class="question-number">${partLabel} - Frage ${q.id}</div>
@@ -913,7 +928,7 @@
                         </button>
                     </div>
                 `;
-                
+
                 container.appendChild(section);
             });
         }
@@ -922,20 +937,20 @@
             const question = questions[questionIndex];
             const section = document.getElementById(`question-${questionIndex}`);
             const options = section.querySelectorAll('.option');
-            
+
             // Remove selection from all options
             options.forEach(opt => opt.classList.remove('selected'));
-            
+
             // Add selection to clicked option
             options[optionIndex].classList.add('selected');
-            
+
             // Store answer
             answers[question.id] = {
                 questionId: question.id,
                 dimension: question.dimension,
                 level: level
             };
-            
+
             // Enable next button
             document.getElementById(`nextBtn-${questionIndex}`).disabled = false;
         }
@@ -944,12 +959,12 @@
             document.querySelectorAll('.question-section').forEach(section => {
                 section.classList.remove('active');
             });
-            
+
             document.getElementById(`question-${index}`).classList.add('active');
             currentQuestion = index;
-            
+
             updateProgress();
-            
+
             // Scroll to top
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
@@ -976,28 +991,28 @@
 
         function calculateResults() {
             const dimensionLevels = {};
-            
+
             // Calculate levels per dimension
             Object.entries(dimensionMapping).forEach(([dimension, questionIds]) => {
                 const ids = Array.isArray(questionIds) ? questionIds : [questionIds];
                 const levels = ids.map(id => answers[id]?.level).filter(l => l !== undefined);
-                
+
                 if (levels.length > 0) {
                     // Use minimum level if multiple questions
                     dimensionLevels[dimension] = Math.min(...levels);
                 }
             });
-            
+
             const levels = Object.values(dimensionLevels);
             const minLevel = Math.min(...levels);
             const avgLevel = Math.round(levels.reduce((a, b) => a + b, 0) / levels.length);
             const maxLevel = Math.max(...levels);
-            
+
             // Find bottlenecks (dimensions at minimum level)
             const bottlenecks = Object.entries(dimensionLevels)
                 .filter(([dim, level]) => level === minLevel)
                 .map(([dim]) => dim);
-            
+
             return {
                 dimensionLevels,
                 minLevel,
@@ -1011,23 +1026,23 @@
         function showResults() {
             document.getElementById('questionsContainer').style.display = 'none';
             document.querySelector('.progress-container').style.display = 'none';
-            
+
             const results = calculateResults();
             const resultsSection = document.getElementById('resultsSection');
             resultsSection.classList.add('active');
-            
+
             // Overall level (using minimum)
             const overallLevel = results.minLevel;
             const levelInfo = levelDescriptions[overallLevel];
-            
+
             document.getElementById('overallLevel').textContent = `Level ${overallLevel}`;
             document.getElementById('levelDescription').textContent = levelInfo.title;
-            
+
             // Metrics
             document.getElementById('minLevel').textContent = results.minLevel;
             document.getElementById('avgLevel').textContent = results.avgLevel.toFixed(1);
             document.getElementById('productivity').textContent = levelInfo.productivity;
-            
+
             // Bottlenecks
             if (results.bottlenecks.length > 0) {
                 document.getElementById('bottleneckAlert').classList.remove('hidden');
@@ -1037,7 +1052,7 @@
                     Diese Bereiche sollten priorisiert werden.
                 `;
             }
-            
+
             // Dimension chart
             const chartHtml = Object.entries(results.dimensionLevels)
                 .sort((a, b) => a[1] - b[1]) // Sort by level
@@ -1052,9 +1067,9 @@
                         </div>
                     `;
                 }).join('');
-            
+
             document.getElementById('dimensionChart').innerHTML = chartHtml;
-            
+
             // Dimension details
             const detailsHtml = Object.entries(results.dimensionLevels)
                 .map(([dimension, level]) => `
@@ -1063,25 +1078,25 @@
                         <span class="dimension-level">Level ${level}</span>
                     </div>
                 `).join('');
-            
+
             document.getElementById('dimensionDetails').innerHTML = detailsHtml;
-            
+
             // Recommendations
             const recommendations = generateRecommendations(results);
             const recList = recommendations.map(rec => `<li>${rec}</li>`).join('');
             document.getElementById('recommendationsList').innerHTML = recList;
-            
+
             // Roadmap
             const roadmap = generateRoadmap(results);
             document.getElementById('roadmapContent').innerHTML = roadmap;
-            
+
             // Scroll to results
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function generateRecommendations(results) {
             const recommendations = [];
-            
+
             // Dimension-specific recommendations based on actual levels
             const dimensionRecs = {
                 "Methoden & Praktiken": {
@@ -1139,12 +1154,12 @@
                     4: "3-5x pro Person, 5-8x Team-Level durch kontinuierliche Automatisierung"
                 }
             };
-            
+
             // Find the 3 weakest dimensions (lowest levels)
             const sortedDimensions = Object.entries(results.dimensionLevels)
                 .sort((a, b) => a[1] - b[1])
                 .slice(0, 3);
-            
+
             // Generate recommendations for weakest dimensions
             sortedDimensions.forEach(([dimension, level]) => {
                 const rec = dimensionRecs[dimension]?.[level];
@@ -1154,11 +1169,11 @@
                     recommendations.push(`${prefix} <strong>${dimension} (Level ${level}):</strong> ${rec}`);
                 }
             });
-            
+
             // Add general next-level recommendation
             const currentLevel = results.minLevel;
             const nextLevel = Math.min(currentLevel + 1, 5);
-            
+
             if (currentLevel < 5) {
                 const levelTransitions = {
                     1: "Fokus: MCP-Integration, Team-Training, systematische AI-Nutzung etablieren",
@@ -1166,10 +1181,10 @@
                     3: "Fokus: Ops/Platform-Team gründen, Agent-Plattform entwickeln, systematische Automatisierung",
                     4: "Fokus: A2A-Kommunikation etablieren, letzte manuelle Schritte automatisieren, Full Autonomy"
                 };
-                
+
                 recommendations.push(`<strong>Übergang zu Level ${nextLevel}:</strong> ${levelTransitions[currentLevel]}`);
             }
-            
+
             return recommendations.slice(0, 6); // Limit to 6 recommendations
         }
 
@@ -1178,7 +1193,7 @@
             const targetLevel = Math.min(level + 1, 5);
             const levelInfo = levelDescriptions[level];
             const targetInfo = levelDescriptions[targetLevel];
-            
+
             let roadmap = `
                 <div style="margin-bottom: 20px;">
                     <strong>Aktueller Stand:</strong> ${levelInfo.title}<br>
@@ -1189,7 +1204,7 @@
                 <div style="background: white; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
                     <strong>📅 Sofort (Monat 1-2):</strong><br>
             `;
-            
+
             if (level === 1) {
                 roadmap += `• MCP-Integration für alle DevTools starten<br>• Team-Training organisieren<br>• Pilotprojekt mit 2-3 Agents definieren`;
             } else if (level === 2) {
@@ -1199,14 +1214,14 @@
             } else if (level === 4) {
                 roadmap += `• A2A-Protokolle evaluieren und testen<br>• Governance-Framework für Full Autonomy<br>• Transition-Plan für verbleibende Mini-Teams`;
             }
-            
+
             roadmap += `
                 </div>
                 
                 <div style="background: white; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
                     <strong>🎯 Kurzfristig (Monat 3-6):</strong><br>
             `;
-            
+
             if (level === 1) {
                 roadmap += `• Systematische Agent-Nutzung in Production<br>• Datenqualität auf 80%+ verbessern<br>• Produktivitätssteigerung messen`;
             } else if (level === 2) {
@@ -1216,14 +1231,14 @@
             } else if (level === 4) {
                 roadmap += `• A2A-Kommunikation in Production<br>• 95%+ Automatisierung erreichen<br>• Event-Driven Architecture etablieren`;
             }
-            
+
             roadmap += `
                 </div>
                 
                 <div style="background: white; padding: 15px; border-radius: 8px;">
                     <strong>🚀 Mittelfristig (Monat 7-12):</strong><br>
             `;
-            
+
             if (level === 1) {
                 roadmap += `• Multi-Threading etablieren<br>• 1,5-2x Produktivität erreichen<br>• Vorbereitung auf Level 3 Transition`;
             } else if (level === 2) {
@@ -1233,9 +1248,9 @@
             } else if (level === 4) {
                 roadmap += `• Vollautonome Agent-Produktion<br>• Ops-Modell etablieren<br>• 10-50x Produktivität erreichen`;
             }
-            
+
             roadmap += `</div>`;
-            
+
             return roadmap;
         }
 
@@ -1243,16 +1258,16 @@
             answers = {};
             currentQuestion = 0;
             showingIntro = true;
-            
+
             document.getElementById('resultsSection').classList.remove('active');
             document.getElementById('questionsContainer').style.display = 'block';
             document.querySelector('.progress-container').style.display = 'block';
             document.getElementById('introSection').style.display = 'block';
-            
+
             // Reset all selections
             document.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
             document.querySelectorAll('[id^="nextBtn-"]').forEach(btn => btn.disabled = true);
-            
+
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
@@ -1262,4 +1277,5 @@
         });
     </script>
 </body>
+
 </html>
